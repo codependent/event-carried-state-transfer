@@ -1,0 +1,10 @@
+---
+micronaut:
+  application:
+    name: shipping-service
+  server:
+    port: 8085
+---
+kafka:
+  bootstrap:
+    servers: localhost:9092

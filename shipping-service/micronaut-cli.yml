@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.codependent.statetransfer.shipping
+---
+testFramework: spek
+sourceLanguage: kotlin
