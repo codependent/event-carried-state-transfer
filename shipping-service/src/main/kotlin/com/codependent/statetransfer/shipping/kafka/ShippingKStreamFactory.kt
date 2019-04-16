@@ -12,19 +12,19 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 
-//@Factory
+@Factory
 class ShippingKStreamFactory {
 
     @Singleton
     @Named("customerStream")
-    fun wordCountStream(builder: ConfiguredStreamBuilder): KStream<Int, Customer> {
+    fun customerStream(builder: ConfiguredStreamBuilder): KStream<Int, Customer> {
         val props = builder.configuration
         props[StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG] = Serdes.String().javaClass.name
         props[StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG] = Serdes.String().javaClass.name
         props[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest"
 
-        val source = builder.stream<Int, Customer>("customer2")
-        source.groupByKey().reduce({ _, y -> y }, Materialized.`as`("customer2-store"))
+        val source = builder.stream<Int, Customer>("customer")
+        source.groupByKey().reduce({ _, y -> y }, Materialized.`as`("customer-store"))
 
         return source
     }
