@@ -1,5 +1,5 @@
 package com.codependent.statetransfer.shipping.dto
 
-data class Customer(var id: Int?, var name: String?, var address: String?) {
+data class Order(var id: Int?, var productId: Int?, var customerId: Int?) {
     constructor() : this(null, null, null)
 }

@@ -11,12 +11,17 @@ spring:
           binder:
             configuration:
               default:
-
                 key:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                  serde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
                 value:
                   serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
         input:
           destination: customer
+          contentType: application/json
+        order:
+          destination: order
+          contentType: application/json
+        output:
+          destination: order
           contentType: application/json
