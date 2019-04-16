@@ -1,0 +1,9 @@
+---
+micronaut:
+  application:
+    name: customer-service
+
+---
+kafka:
+  bootstrap:
+    servers: localhost:9092
