@@ -1,0 +1,22 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: spring-boot-shipping-service
+  cloud:
+    stream:
+      kafka:
+        streams:
+          binder:
+            configuration:
+              default:
+
+                key:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                value:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      bindings:
+        input:
+          destination: customer
+          contentType: application/json
