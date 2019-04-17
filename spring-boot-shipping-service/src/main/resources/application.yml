@@ -25,3 +25,9 @@ spring:
         output:
           destination: order
           contentType: application/json
+
+logging:
+  level:
+    com:
+      fasterxml:
+        jackson: trace

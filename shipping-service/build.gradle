@@ -29,7 +29,6 @@ configurations {
 }
 
 dependencies {
-    compile "io.micronaut.configuration:micronaut-kafka"
     compile "io.micronaut:micronaut-http-client"
     compile "io.micronaut.configuration:micronaut-kafka-streams"
     compile "io.micronaut:micronaut-http-server-netty"

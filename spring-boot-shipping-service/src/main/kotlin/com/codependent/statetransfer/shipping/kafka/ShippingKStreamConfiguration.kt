@@ -35,6 +35,7 @@ class ShippingKStreamConfiguration {
         val customerTable: KTable<Int, Customer> = input.groupByKey(Serialized.with(intSerde, customerSerde))
                 .reduce({ _, y -> y }, stateStore)
 
+
         return (order.selectKey { key, value -> value.customerId } as KStream<Int, Order>)
                 .join(customerTable, { orderIt, customer ->
                     OrderShipped(orderIt.id, orderIt.productId, customer.name, customer.address)

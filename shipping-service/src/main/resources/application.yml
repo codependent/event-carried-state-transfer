@@ -1,7 +1,7 @@
 ---
 micronaut:
   application:
-    name: shipping-service
+    name: shipping-service-1234
   server:
     port: 8085
 ---
