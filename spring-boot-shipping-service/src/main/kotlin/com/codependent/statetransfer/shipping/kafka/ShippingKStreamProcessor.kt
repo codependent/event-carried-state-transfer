@@ -5,6 +5,7 @@ import com.codependent.statetransfer.shipping.dto.Order
 import com.codependent.statetransfer.shipping.dto.OrderShipped
 import org.apache.kafka.streams.kstream.KStream
 import org.springframework.cloud.stream.annotation.Input
+import org.springframework.cloud.stream.annotation.Output
 
 interface ShippingKStreamProcessor {
 
@@ -14,7 +15,7 @@ interface ShippingKStreamProcessor {
     @Input("order")
     fun order(): KStream<String, Order>
 
-    @Input("output")
+    @Output("output")
     fun output(): KStream<String, OrderShipped>
 
 }
