@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-boot-customer-service
+  cloud:
+    stream:
+      kafka:
+        binder:
+          configuration:
+            default:
+              key:
+                serde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
+              value:
+                serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        bindings:
+          output:
+            producer:
+              configuration:
+                key:
+                  serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      bindings:
+        output:
+          destination: customer
+          contentType: application/json

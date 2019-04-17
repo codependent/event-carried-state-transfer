@@ -37,8 +37,9 @@ class ShippingKStreamConfiguration {
 
         return (order.selectKey { key, value -> value.customerId } as KStream<Int, Order>)
                 .join(customerTable, { orderIt, customer ->
-                    OrderShipped(orderIt.id, customer.name, customer.address)
+                    OrderShipped(orderIt.id, orderIt.productId, customer.name, customer.address)
                 }, Joined.with(intSerde, orderSerde, customerSerde))
+                .selectKey { key, value -> value.id }
 
     }
 
