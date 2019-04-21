@@ -1,6 +1,6 @@
 package com.codependent.statetransfer.order.kafka
 
-import com.codependent.statetransfer.order.dto.Order
+import com.codependent.statetransfer.order.dto.OrderCreatedEvent
 import io.micronaut.configuration.kafka.annotation.KafkaClient
 import io.micronaut.configuration.kafka.annotation.KafkaKey
 import io.micronaut.configuration.kafka.annotation.Topic
@@ -10,6 +10,6 @@ import io.micronaut.configuration.kafka.annotation.Topic
 interface OrderKafkaProducer {
 
     @Topic("order")
-    fun sendOrder(@KafkaKey id: Int, order: Order)
+    fun sendOrder(@KafkaKey id: Int, order: OrderCreatedEvent)
 
 }

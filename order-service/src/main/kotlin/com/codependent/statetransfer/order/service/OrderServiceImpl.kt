@@ -1,6 +1,7 @@
 package com.codependent.statetransfer.order.service
 
 import com.codependent.statetransfer.order.dto.Order
+import com.codependent.statetransfer.order.dto.OrderCreatedEvent
 import com.codependent.statetransfer.order.kafka.OrderKafkaProducer
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -28,6 +29,7 @@ class OrderServiceImpl(private val orderKafkaProducer: OrderKafkaProducer) : Ord
 
     override fun save(order: Order) {
         orders[order.id] = order
-        orderKafkaProducer.sendOrder(order.id, order)
+        orderKafkaProducer.sendOrder(order.id,
+                OrderCreatedEvent(order.id, order.productId, order.customerId))
     }
 }

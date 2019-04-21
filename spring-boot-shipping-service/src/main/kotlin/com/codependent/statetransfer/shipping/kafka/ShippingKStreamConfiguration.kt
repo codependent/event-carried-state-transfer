@@ -1,10 +1,12 @@
 package com.codependent.statetransfer.shipping.kafka
 
 import com.codependent.statetransfer.shipping.dto.Customer
-import com.codependent.statetransfer.shipping.dto.Order
-import com.codependent.statetransfer.shipping.dto.OrderShipped
+import com.codependent.statetransfer.shipping.dto.OrderCreatedEvent
+import com.codependent.statetransfer.shipping.dto.OrderEvent
+import com.codependent.statetransfer.shipping.dto.OrderShippedEvent
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.common.utils.Bytes
+import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.kstream.*
 import org.apache.kafka.streams.state.KeyValueStore
 import org.springframework.cloud.stream.annotation.Input
@@ -21,11 +23,12 @@ class ShippingKStreamConfiguration {
 
     @StreamListener
     @SendTo("output")
-    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") order: KStream<Int, Order>): KStream<Int, OrderShipped> {
+    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") orderEvent: KStream<Int, OrderEvent>): KStream<Int, OrderShippedEvent> {
 
         val intSerde = Serdes.IntegerSerde()
         val customerSerde = JsonSerde<Customer>(Customer::class.java)
-        val orderSerde = JsonSerde<Order>(Order::class.java)
+        val orderCreatedSerde = JsonSerde<OrderCreatedEvent>(OrderCreatedEvent::class.java)
+        val orderShippedSerde = JsonSerde<OrderShippedEvent>(OrderShippedEvent::class.java)
 
         val stateStore: Materialized<Int, Customer, KeyValueStore<Bytes, ByteArray>> =
                 Materialized.`as`<Int, Customer, KeyValueStore<Bytes, ByteArray>>("customer-store")
@@ -36,12 +39,14 @@ class ShippingKStreamConfiguration {
                 .reduce({ _, y -> y }, stateStore)
 
 
-        return (order.selectKey { key, value -> value.customerId } as KStream<Int, Order>)
+        return (orderEvent.filter { _, value -> value is OrderCreatedEvent }
+                .map { key, value -> KeyValue(key, value as OrderCreatedEvent) }
+                .selectKey { _, value -> value.customerId } as KStream<Int, OrderCreatedEvent>)
                 .join(customerTable, { orderIt, customer ->
-                    OrderShipped(orderIt.id, orderIt.productId, customer.name, customer.address)
-                }, Joined.with(intSerde, orderSerde, customerSerde))
-                .selectKey { key, value -> value.id }
-
+                    OrderShippedEvent(orderIt.id, orderIt.productId, customer.name, customer.address)
+                }, Joined.with(intSerde, orderCreatedSerde, customerSerde))
+                .selectKey { _, value -> value.id }
+                //.to("order", Produced.with(intSerde, orderShippedSerde))
     }
 
 }

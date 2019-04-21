@@ -1,5 +1,0 @@
-package com.codependent.statetransfer.shipping.dto
-
-data class OrderShipped(var id: Int?, var productId: Int?, var customerName: String?, var customerAddress: String?) {
-    constructor() : this(null, null, null, null)
-}
