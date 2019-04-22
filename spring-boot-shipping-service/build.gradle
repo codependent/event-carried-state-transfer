@@ -1,9 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:0.16.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.1.4.RELEASE'
     id 'org.jetbrains.kotlin.jvm' version '1.2.71'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.2.71'
 }
-
+apply plugin: "com.commercehub.gradle.plugin.avro"
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.codependent.statetransfer.shipping'
@@ -12,10 +21,13 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    maven { url "https://packages.confluent.io/maven" }
 }
 
 ext {
     set('springCloudVersion', 'Greenwich.SR1')
+    set('avro.version', '1.8.2')
+    set('confluent.version', '5.2.1')
 }
 
 dependencies {
@@ -25,6 +37,14 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'org.springframework.cloud:spring-cloud-stream-reactive'
+    implementation 'org.springframework.cloud:spring-cloud-stream-schema'
+    implementation("io.confluent:kafka-avro-serializer:${project.ext['confluent.version']}") {
+        exclude group: 'org.slf4j', module: 'org.slf4j'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+    implementation("io.confluent:kafka-streams-avro-serde:${project.ext['confluent.version']}")
+    implementation "io.confluent:kafka-schema-registry-client:${project.ext['confluent.version']}"
+    implementation "org.apache.avro:avro:${project.ext['avro.version']}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'

@@ -13,21 +13,15 @@ spring:
               default:
                 key:
                   serde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
-                value:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
         input:
           destination: customer
-          contentType: application/json
+          contentType: application/*+avro
         order:
           destination: order
-          contentType: application/json
+          contentType: application/*+avro
         output:
           destination: order
-          contentType: application/json
-
-logging:
-  level:
-    com:
-      fasterxml:
-        jackson: trace
+          contentType: application/*+avro
+      schema-registry-client:
+        endpoint: http://localhost:8081

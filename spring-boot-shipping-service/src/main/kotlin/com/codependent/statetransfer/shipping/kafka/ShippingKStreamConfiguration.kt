@@ -1,19 +1,17 @@
 package com.codependent.statetransfer.shipping.kafka
 
-import com.codependent.statetransfer.shipping.dto.Customer
-import com.codependent.statetransfer.shipping.dto.OrderCreatedEvent
-import com.codependent.statetransfer.shipping.dto.OrderEvent
-import com.codependent.statetransfer.shipping.dto.OrderShippedEvent
+import com.codependent.statetransfer.customer.Customer
+import com.codependent.statetransfer.order.OrderCreatedEvent
+import com.codependent.statetransfer.order.OrderShippedEvent
+import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig
+import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.common.utils.Bytes
-import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.kstream.*
 import org.apache.kafka.streams.state.KeyValueStore
 import org.springframework.cloud.stream.annotation.Input
 import org.springframework.cloud.stream.annotation.StreamListener
 import org.springframework.context.annotation.Configuration
-import org.springframework.kafka.support.serializer.JsonSerde
-import org.springframework.messaging.handler.annotation.SendTo
 
 
 @Suppress("UNCHECKED_CAST")
@@ -22,13 +20,20 @@ class ShippingKStreamConfiguration {
 
 
     @StreamListener
-    @SendTo("output")
-    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") orderEvent: KStream<Int, OrderEvent>): KStream<Int, OrderShippedEvent> {
+    //@SendTo("output")
+    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") orderEvent: KStream<Int, OrderCreatedEvent>) {
+
+        val serdeConfig = mapOf(
+                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG to "http://localhost:8081")
 
         val intSerde = Serdes.IntegerSerde()
-        val customerSerde = JsonSerde<Customer>(Customer::class.java)
-        val orderCreatedSerde = JsonSerde<OrderCreatedEvent>(OrderCreatedEvent::class.java)
-        val orderShippedSerde = JsonSerde<OrderShippedEvent>(OrderShippedEvent::class.java)
+        val customerSerde = SpecificAvroSerde<Customer>()
+        customerSerde.configure(serdeConfig, true)
+        val orderCreatedSerde = SpecificAvroSerde<OrderCreatedEvent>()
+        orderCreatedSerde.configure(serdeConfig, true)
+        val orderShippedSerde = SpecificAvroSerde<OrderShippedEvent>()
+        orderShippedSerde.configure(serdeConfig, true)
+
 
         val stateStore: Materialized<Int, Customer, KeyValueStore<Bytes, ByteArray>> =
                 Materialized.`as`<Int, Customer, KeyValueStore<Bytes, ByteArray>>("customer-store")
@@ -38,15 +43,14 @@ class ShippingKStreamConfiguration {
         val customerTable: KTable<Int, Customer> = input.groupByKey(Serialized.with(intSerde, customerSerde))
                 .reduce({ _, y -> y }, stateStore)
 
-
-        return (orderEvent.filter { _, value -> value is OrderCreatedEvent }
-                .map { key, value -> KeyValue(key, value as OrderCreatedEvent) }
+        /*return (*/
+        (orderEvent.filter { _, value -> value is OrderCreatedEvent && value.id != 0 }
                 .selectKey { _, value -> value.customerId } as KStream<Int, OrderCreatedEvent>)
                 .join(customerTable, { orderIt, customer ->
                     OrderShippedEvent(orderIt.id, orderIt.productId, customer.name, customer.address)
                 }, Joined.with(intSerde, orderCreatedSerde, customerSerde))
                 .selectKey { _, value -> value.id }
-                //.to("order", Produced.with(intSerde, orderShippedSerde))
+        .to("order", Produced.with(intSerde, orderShippedSerde))
     }
 
 }
