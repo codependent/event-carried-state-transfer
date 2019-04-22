@@ -1,6 +1,6 @@
 package com.codependent.statetransfer.customer.service
 
-import com.codependent.statetransfer.customer.dto.Customer
+import com.codependent.statetransfer.customer.Customer
 import org.springframework.cloud.stream.messaging.Source
 import org.springframework.kafka.support.KafkaHeaders
 import org.springframework.messaging.support.MessageBuilder

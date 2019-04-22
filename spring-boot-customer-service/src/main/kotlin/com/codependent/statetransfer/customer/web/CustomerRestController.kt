@@ -1,6 +1,6 @@
 package com.codependent.statetransfer.customer.web
 
-import com.codependent.statetransfer.customer.dto.Customer
+import com.codependent.statetransfer.customer.Customer
 import com.codependent.statetransfer.customer.service.CustomerService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

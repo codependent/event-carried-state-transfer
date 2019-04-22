@@ -1,6 +1,6 @@
 package com.codependent.statetransfer.customer.service
 
-import com.codependent.statetransfer.customer.dto.Customer
+import com.codependent.statetransfer.customer.Customer
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 

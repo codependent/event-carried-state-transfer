@@ -4,13 +4,6 @@ spring:
   cloud:
     stream:
       kafka:
-        binder:
-          configuration:
-            default:
-              key:
-                serde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
-              value:
-                serde: org.apache.kafka.common.serialization.Serdes$StringSerde
         bindings:
           output:
             producer:
@@ -20,4 +13,6 @@ spring:
       bindings:
         output:
           destination: customer
-          contentType: application/json
+          contentType: application/*+avro
+      schema-registry-client:
+        endpoint: http://localhost:8081

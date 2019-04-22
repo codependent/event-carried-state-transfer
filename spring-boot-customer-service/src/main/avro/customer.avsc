@@ -1,10 +1,10 @@
 {
-  "namespace" : "com.codependent.statetransfer.order",
+  "namespace" : "com.codependent.statetransfer.customer",
   "type" : "record",
   "name" : "Customer",
   "fields" : [
     {"name":"id","type":"int"},
-    {"name":"productId","type":"int"},
-    {"name":"customerId","type":"int"}
+    {"name":"name","type":"string"},
+    {"name":"address","type":"string"}
   ]
 }
