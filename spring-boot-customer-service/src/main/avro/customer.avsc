@@ -1,7 +1,7 @@
 {
   "namespace" : "com.codependent.statetransfer.order",
   "type" : "record",
-  "name" : "OrderCreatedEvent",
+  "name" : "Customer",
   "fields" : [
     {"name":"id","type":"int"},
     {"name":"productId","type":"int"},
