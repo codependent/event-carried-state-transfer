@@ -12,6 +12,7 @@ import org.apache.kafka.streams.state.KeyValueStore
 import org.springframework.cloud.stream.annotation.Input
 import org.springframework.cloud.stream.annotation.StreamListener
 import org.springframework.context.annotation.Configuration
+import org.springframework.messaging.handler.annotation.SendTo
 
 
 @Suppress("UNCHECKED_CAST")
@@ -20,8 +21,8 @@ class ShippingKStreamConfiguration {
 
 
     @StreamListener
-    //@SendTo("output")
-    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") orderEvent: KStream<Int, OrderCreatedEvent>) {
+    @SendTo("output")
+    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") orderEvent: KStream<Int, OrderCreatedEvent>): KStream<Int, OrderShippedEvent> {
 
         val serdeConfig = mapOf(
                 AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG to "http://localhost:8081")
@@ -43,14 +44,13 @@ class ShippingKStreamConfiguration {
         val customerTable: KTable<Int, Customer> = input.groupByKey(Serialized.with(intSerde, customerSerde))
                 .reduce({ _, y -> y }, stateStore)
 
-        /*return (*/
-        (orderEvent.filter { _, value -> value is OrderCreatedEvent && value.id != 0 }
+        return (orderEvent.filter { _, value -> value is OrderCreatedEvent && value.id != 0 }
                 .selectKey { _, value -> value.customerId } as KStream<Int, OrderCreatedEvent>)
                 .join(customerTable, { orderIt, customer ->
                     OrderShippedEvent(orderIt.id, orderIt.productId, customer.name, customer.address)
                 }, Joined.with(intSerde, orderCreatedSerde, customerSerde))
                 .selectKey { _, value -> value.id }
-        .to("order", Produced.with(intSerde, orderShippedSerde))
+        //.to("order", Produced.with(intSerde, orderShippedSerde))
     }
 
 }
