@@ -16,8 +16,8 @@ import java.util.*
 import org.apache.kafka.streams.KafkaStreams
 import org.apache.kafka.streams.KeyValue
 import io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
-
-
+import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
+import org.apache.avro.generic.GenericRecord
 
 
 fun main(args: Array<String>) {
@@ -44,6 +44,8 @@ fun main(args: Array<String>) {
     orderCreatedSerde.configure(serdeConfig, false)
     val orderShippedSerde = SpecificAvroSerde<OrderShippedEvent>()
     orderShippedSerde.configure(serdeConfig, false)
+    val genericSerde = GenericAvroSerde()
+    genericSerde.configure(serdeConfig, false)
 
 
     val customerStream = builder.stream<Int, Customer>("customer",
@@ -59,11 +61,12 @@ fun main(args: Array<String>) {
         .groupByKey(Serialized.with(intSerde, customerSerde))
         .reduce({ _, y -> y }, stateStore)
 
-    val orderStream = builder.stream<Int, OrderCreatedEvent>("order",
-        Consumed.with(intSerde, orderCreatedSerde)) as KStream<Int, OrderCreatedEvent>
+    val orderStream = builder.stream<Int, GenericRecord>("order",
+        Consumed.with(intSerde, genericSerde)) as KStream<Int, GenericRecord>
 
-    (orderStream.filter { _, value -> value is OrderCreatedEvent && value.id != 0 }
-        .selectKey { _, value -> value.customerId } as KStream<Int, OrderCreatedEvent>)
+    (orderStream.filter { _, value -> value.schema.name == "OrderCreatedEvent" }
+        .map { key, value -> KeyValue(key, OrderCreatedEvent(value.get("id") as Int, value.get("productId") as Int, value.get("customerId") as Int)) }
+        .selectKey { _, value -> value.getCustomerId() } as KStream<Int, OrderCreatedEvent>)
         .join(customerTable, { orderIt, customer ->
             OrderShippedEvent(orderIt.id, orderIt.productId, customer.name, customer.address)
         }, Joined.with(intSerde, orderCreatedSerde, customerSerde))
