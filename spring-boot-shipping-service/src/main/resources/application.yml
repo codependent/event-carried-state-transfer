@@ -25,3 +25,12 @@ spring:
           contentType: application/*+avro
       schema-registry-client:
         endpoint: http://localhost:8081
+
+logging:
+  level:
+    org:
+      apache:
+        kafka:
+          streams:
+            processor:
+              internals: trace
