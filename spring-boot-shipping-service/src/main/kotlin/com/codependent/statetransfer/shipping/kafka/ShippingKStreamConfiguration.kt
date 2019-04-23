@@ -29,11 +29,11 @@ class ShippingKStreamConfiguration {
 
         val intSerde = Serdes.IntegerSerde()
         val customerSerde = SpecificAvroSerde<Customer>()
-        customerSerde.configure(serdeConfig, true)
+        customerSerde.configure(serdeConfig, false)
         val orderCreatedSerde = SpecificAvroSerde<OrderCreatedEvent>()
-        orderCreatedSerde.configure(serdeConfig, true)
+        orderCreatedSerde.configure(serdeConfig, false)
         val orderShippedSerde = SpecificAvroSerde<OrderShippedEvent>()
-        orderShippedSerde.configure(serdeConfig, true)
+        orderShippedSerde.configure(serdeConfig, false)
 
 
         val stateStore: Materialized<Int, Customer, KeyValueStore<Bytes, ByteArray>> =
