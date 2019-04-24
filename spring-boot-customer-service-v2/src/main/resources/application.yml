@@ -18,8 +18,6 @@ spring:
         output:
           destination: customer
           contentType: application/*+avro
-          producer:
-            headerMode: embeddedHeaders
       schema-registry-client:
         endpoint: http://localhost:8081
 
