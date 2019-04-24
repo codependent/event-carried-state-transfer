@@ -13,8 +13,8 @@ import reactor.core.publisher.toFlux
 class CustomerServiceImpl(private val customerKafkaProducer: Source) : CustomerService {
 
     private val customers = mutableMapOf(
-            1 to Customer(1, "Joe", "Baltic Street"),
-            2 to Customer(2, "Anna", "Rutherford Drive"))
+            1 to Customer(1, "Joe", "Baltic Street", 30),
+            2 to Customer(2, "Anna", "Rutherford Drive", 25))
 
     override fun get(id: Int): Mono<Customer> {
         return if (customers[id] != null) {
