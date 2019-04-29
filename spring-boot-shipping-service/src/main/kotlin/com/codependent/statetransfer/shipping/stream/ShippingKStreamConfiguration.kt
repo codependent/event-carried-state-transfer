@@ -1,4 +1,4 @@
-package com.codependent.statetransfer.shipping.kafka
+package com.codependent.statetransfer.shipping.stream
 
 import com.codependent.statetransfer.customer.Customer
 import com.codependent.statetransfer.order.OrderCreatedEvent

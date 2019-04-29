@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ecd286b-f483-429c-b18d-5d756d1599bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-boot-customer-service/src/main/java/org/springframework/cloud/stream/schema/avro/RecordNamingStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../spring-boot-customer-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-boot-customer-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-boot-shipping-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-boot-shipping-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -62,18 +64,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-schema-registry-client/5.2.1/7d6338d8d70a8e9169a589aa935422f90897bfb4/kafka-schema-registry-client-5.2.1.jar!/io/confluent/kafka/schemaregistry/client/rest/RestService.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="110" selection-start-line="110" selection-end-line="110" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/AbstractKafkaAvroSerDe.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
+            <state relative-caret-position="462">
               <caret line="47" selection-start-line="47" selection-end-line="47" />
             </state>
           </provider>
@@ -82,17 +75,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/AbstractKafkaAvroDeserializer.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
+            <state relative-caret-position="1288">
               <caret line="112" selection-start-line="112" selection-end-line="112" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/codependent/statetransfer/shipping/KafkaShippingApplication.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="61" column="42" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="61" selection-end-column="42" />
+            <state relative-caret-position="236">
+              <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
               <folding>
                 <element signature="e#48#969#0" expanded="true" />
               </folding>
@@ -100,10 +93,19 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-streams-avro-serde/5.2.1/c2b8411533f48e04574599638c2c28417a768932/kafka-streams-avro-serde-5.2.1.jar!/io/confluent/kafka/streams/serdes/avro/GenericAvroSerde.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="17" column="29" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-streams/2.2.0/90e5ac6b1a23c783dac664380aa3d64fcc8c22e5/kafka-streams-2.2.0-sources.jar!/org/apache/kafka/streams/processor/internals/RecordDeserializer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
+            <state relative-caret-position="571">
               <caret line="76" selection-start-line="76" selection-end-line="76" />
             </state>
           </provider>
@@ -112,7 +114,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-streams/2.2.0/90e5ac6b1a23c783dac664380aa3d64fcc8c22e5/kafka-streams-2.2.0-sources.jar!/org/apache/kafka/streams/processor/internals/SourceNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
+            <state relative-caret-position="532">
               <caret line="59" column="57" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="57" />
             </state>
           </provider>
@@ -121,7 +123,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-clients/2.2.0/4c4cc3e980e26180dc930c9c014f4c039170b68b/kafka-clients-2.2.0-sources.jar!/org/apache/kafka/common/serialization/Deserializer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
+            <state relative-caret-position="546">
               <caret line="57" selection-start-line="57" selection-end-line="57" />
               <folding>
                 <element signature="e#2561#2562#0" expanded="true" />
@@ -145,7 +147,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/KafkaAvroDeserializer.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
+            <state relative-caret-position="350">
               <caret line="33" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="e#1073#1074#0" expanded="true" />
@@ -157,7 +159,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-clients/2.2.0/4c4cc3e980e26180dc930c9c014f4c039170b68b/kafka-clients-2.2.0-sources.jar!/org/apache/kafka/clients/consumer/ConsumerRecord.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
+            <state relative-caret-position="2198">
               <caret line="178" selection-start-line="178" selection-end-line="178" />
               <folding>
                 <element signature="e#7928#7929#0" expanded="true" />
@@ -184,6 +186,7 @@
       <find>http://localhost:8081</find>
       <find>getint</find>
       <find>order</find>
+      <find>No schema can be inferred from type org.apache.avro.generic.GenericRecord and no schema has been explicitly configure</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -208,8 +211,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -245,18 +246,32 @@
             </path>
             <path>
               <item name="kafka-shipping-service" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kafka-shipping-service" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
               <item name="kafka-shipping-service" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Gradle: io.confluent:kafka-streams-avro-serde:5.2.1" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="kafka-shipping-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Gradle: io.confluent:kafka-streams-avro-serde:5.2.1" type="70bed36:NamedLibraryElementNode" />
+              <item name="kafka-streams-avro-serde-5.2.1.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kafka-shipping-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Gradle: io.confluent:kafka-streams-avro-serde:5.2.1" type="70bed36:NamedLibraryElementNode" />
+              <item name="kafka-streams-avro-serde-5.2.1.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="avro" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -352,6 +367,7 @@
       <workItem from="1556005310449" duration="15769000" />
       <workItem from="1556024703552" duration="904000" />
       <workItem from="1556028629250" duration="4121000" />
+      <workItem from="1556315882555" duration="1956000" />
     </task>
     <task id="LOCAL-00001" summary="fixed kafka streams example">
       <created>1556024223019</created>
@@ -364,12 +380,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20798000" />
+    <option name="totallyTimeSpent" value="22754000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17238913" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17453505" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -778,40 +795,37 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/AbstractKafkaAvroSerDe.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-schema-registry-client/5.2.1/7d6338d8d70a8e9169a589aa935422f90897bfb4/kafka-schema-registry-client-5.2.1.jar!/io/confluent/kafka/schemaregistry/client/rest/RestService.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
+        <state relative-caret-position="924">
           <caret line="110" selection-start-line="110" selection-end-line="110" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/codependent/statetransfer/shipping/KafkaShippingApplication.kt">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/AbstractKafkaAvroSerDe.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="61" column="42" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="61" selection-end-column="42" />
-          <folding>
-            <element signature="e#48#969#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="462">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/AbstractKafkaAvroDeserializer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1288">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-streams/2.2.0/90e5ac6b1a23c783dac664380aa3d64fcc8c22e5/kafka-streams-2.2.0-sources.jar!/org/apache/kafka/streams/processor/internals/SourceNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
+        <state relative-caret-position="532">
           <caret line="59" column="57" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-clients/2.2.0/4c4cc3e980e26180dc930c9c014f4c039170b68b/kafka-clients-2.2.0-sources.jar!/org/apache/kafka/common/serialization/Deserializer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
+        <state relative-caret-position="546">
           <caret line="57" selection-start-line="57" selection-end-line="57" />
           <folding>
             <element signature="e#2561#2562#0" expanded="true" />
@@ -831,7 +845,7 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/KafkaAvroDeserializer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
+        <state relative-caret-position="350">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="e#1073#1074#0" expanded="true" />
@@ -839,16 +853,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-avro-serializer/5.2.1/c65a4dcbd1f590f7bc0cd144a2174d05235e789a/kafka-avro-serializer-5.2.1.jar!/io/confluent/kafka/serializers/AbstractKafkaAvroDeserializer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-clients/2.2.0/4c4cc3e980e26180dc930c9c014f4c039170b68b/kafka-clients-2.2.0-sources.jar!/org/apache/kafka/clients/consumer/ConsumerRecord.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
+        <state relative-caret-position="2198">
           <caret line="178" selection-start-line="178" selection-end-line="178" />
           <folding>
             <element signature="e#7928#7929#0" expanded="true" />
@@ -862,8 +869,25 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/kafka-streams/2.2.0/90e5ac6b1a23c783dac664380aa3d64fcc8c22e5/kafka-streams-2.2.0-sources.jar!/org/apache/kafka/streams/processor/internals/RecordDeserializer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
+        <state relative-caret-position="571">
           <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.confluent/kafka-streams-avro-serde/5.2.1/c2b8411533f48e04574599638c2c28417a768932/kafka-streams-avro-serde-5.2.1.jar!/io/confluent/kafka/streams/serdes/avro/GenericAvroSerde.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="17" column="29" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/codependent/statetransfer/shipping/KafkaShippingApplication.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
+          <folding>
+            <element signature="e#48#969#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

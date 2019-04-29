@@ -10,10 +10,6 @@ spring:
               configuration:
                 key:
                   serializer: org.apache.kafka.common.serialization.IntegerSerializer
-                value:
-                  subject:
-                    name:
-                      strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
       bindings:
         output:
           destination: customer
