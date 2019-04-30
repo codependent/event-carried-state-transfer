@@ -65,7 +65,7 @@ fun main(args: Array<String>) {
         Consumed.with(intSerde, genericSerde)) as KStream<Int, GenericRecord>
 
     (orderStream.filter { _, value -> value.schema.name == "OrderCreatedEvent" }
-        .map { key, value -> KeyValue(key, OrderCreatedEvent(value.get("id") as Int, value.get("productId") as Int, value.get("customerId") as Int)) }
+        .mapValues { _, value -> OrderCreatedEvent(value.get("id") as Int, value.get("productId") as Int, value.get("customerId") as Int) }
         .selectKey { _, value -> value.getCustomerId() } as KStream<Int, OrderCreatedEvent>)
         .join(customerTable, { orderIt, customer ->
             OrderShippedEvent(orderIt.id, orderIt.productId, customer.name, customer.address)
@@ -74,6 +74,9 @@ fun main(args: Array<String>) {
         .to("order", Produced.with(intSerde, orderShippedSerde))
 
 
-    val streams = KafkaStreams(builder.build(), streamsConfiguration)
+    val topology = builder.build()
+    println(topology.describe())
+
+    val streams = KafkaStreams(topology, streamsConfiguration)
     streams.start()
 }
