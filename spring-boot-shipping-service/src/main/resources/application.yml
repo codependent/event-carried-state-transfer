@@ -6,6 +6,19 @@ spring:
     name: spring-boot-shipping-service
   cloud:
     stream:
+      bindings:
+        input:
+          destination: customer
+          consumer:
+            useNativeDecoding: true
+        order:
+          destination: order
+          consumer:
+            useNativeDecoding: true
+        output:
+          destination: order
+          producer:
+            useNativeEncoding: true
       kafka:
         streams:
           binder:
@@ -13,24 +26,16 @@ spring:
               default:
                 key:
                   serde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
-      bindings:
-        input:
-          destination: customer
-          contentType: application/*+avro
-        order:
-          destination: order
-          contentType: application/*+avro
-        output:
-          destination: order
-          contentType: application/*+avro
-      schema-registry-client:
-        endpoint: http://localhost:8081
-
-logging:
-  level:
-    org:
-      apache:
-        kafka:
-          streams:
-            processor:
-              internals: trace
+                value:
+                  serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              schema:
+                registry:
+                  url: http://localhost:8081
+              value:
+                subject:
+                  name:
+                    strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
+          bindings:
+            input:
+              consumer:
+                valueSerde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde

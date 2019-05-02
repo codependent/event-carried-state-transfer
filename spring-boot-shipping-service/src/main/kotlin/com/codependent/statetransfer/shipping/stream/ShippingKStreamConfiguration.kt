@@ -5,6 +5,7 @@ import com.codependent.statetransfer.order.OrderCreatedEvent
 import com.codependent.statetransfer.order.OrderShippedEvent
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.common.utils.Bytes
 import org.apache.kafka.streams.kstream.*
@@ -22,7 +23,7 @@ class ShippingKStreamConfiguration {
 
     @StreamListener
     @SendTo("output")
-    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") orderEvent: KStream<Int, OrderCreatedEvent>): KStream<Int, OrderShippedEvent> {
+    fun process(@Input("input") input: KStream<Int, Customer>, @Input("order") orderStream: KStream<Int, GenericRecord>): KStream<Int, OrderShippedEvent> {
 
         val serdeConfig = mapOf(
                 AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG to "http://localhost:8081")
@@ -44,13 +45,13 @@ class ShippingKStreamConfiguration {
         val customerTable: KTable<Int, Customer> = input.groupByKey(Serialized.with(intSerde, customerSerde))
                 .reduce({ _, y -> y }, stateStore)
 
-        return (orderEvent.filter { _, value -> value is OrderCreatedEvent && value.id != 0 }
+        return (orderStream.filter { _, value -> value.schema.name == "OrderCreatedEvent" }
+                .mapValues { _, value -> OrderCreatedEvent(value.get("id") as Int, value.get("productId") as Int, value.get("customerId") as Int) }
                 .selectKey { _, value -> value.customerId } as KStream<Int, OrderCreatedEvent>)
                 .join(customerTable, { orderIt, customer ->
                     OrderShippedEvent(orderIt.id, orderIt.productId, customer.name, customer.address)
                 }, Joined.with(intSerde, orderCreatedSerde, customerSerde))
                 .selectKey { _, value -> value.id }
-        //.to("order", Produced.with(intSerde, orderShippedSerde))
     }
 
 }
