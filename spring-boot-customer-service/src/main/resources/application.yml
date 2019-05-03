@@ -12,9 +12,13 @@ spring:
                   serializer: org.apache.kafka.common.serialization.IntegerSerializer
                 value:
                   serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                  subject:
+                    name:
+                      strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
                 schema:
                   registry:
                     url: http://localhost:8081
+
       bindings:
         output:
           destination: customer

@@ -13,3 +13,4 @@ class SpringBootCustomerServiceApplication
 fun main(args: Array<String>) {
     runApplication<SpringBootCustomerServiceApplication>(*args)
 }
+

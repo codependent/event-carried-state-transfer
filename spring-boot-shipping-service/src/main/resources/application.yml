@@ -36,6 +36,6 @@ spring:
                   name:
                     strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
           bindings:
-            input:
+            order:
               consumer:
                 valueSerde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
